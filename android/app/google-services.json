@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1091135677052",
+    "project_id": "stargazing-165f8",
+    "storage_bucket": "stargazing-165f8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1091135677052:android:c8d591d66bab911b90dff9",
+        "android_client_info": {
+          "package_name": "com.example.stargazing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1091135677052-iegvu36jjq4kaiq0q9q38tgujke8anum.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGnMiR9RkEqjm3zYuum-oRfxGVVeV-zRc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1091135677052-iegvu36jjq4kaiq0q9q38tgujke8anum.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
