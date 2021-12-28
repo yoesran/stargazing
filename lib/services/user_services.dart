@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:stargazing/auth_services.dart';
-
-import 'models/users.dart';
+import 'package:stargazing/models/users.dart';
+import 'package:stargazing/services/auth_services.dart';
 
 class UserServices {
   static CollectionReference userCollection = FirebaseFirestore.instance.collection("users");

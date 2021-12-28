@@ -60,7 +60,7 @@ class QuestionController extends GetxController {
       _answers.add(_selectedIndex!);
       _selectedIndex = null;
       _questionNumber.value++;
-      _pageController?.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
+      _pageController?.nextPage(duration: const Duration(milliseconds: 1), curve: Curves.ease);
     } else {
       _answers.add(_selectedIndex!);
       // _pageController?.dispose();

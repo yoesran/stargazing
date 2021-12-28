@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
+import 'package:stargazing/models/users.dart';
 import 'package:stargazing/quiz/quiz.dart';
-
-import 'models/users.dart';
-import 'user_services.dart';
+import 'package:stargazing/services/user_services.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({Key? key}) : super(key: key);
@@ -90,9 +91,62 @@ class QuizCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(() => Quiz(
+        if (level == 1) {
+          pushNewScreen(
+            context,
+            screen: Quiz(
               level: level,
-            ));
+            ),
+            withNavBar: true,
+            pageTransitionAnimation: PageTransitionAnimation.fade,
+          );
+        } else if (level == 2) {
+          if (users!.level1points == 20) {
+            pushNewScreen(
+              context,
+              screen: Quiz(
+                level: level,
+              ),
+              withNavBar: true,
+              pageTransitionAnimation: PageTransitionAnimation.fade,
+            );
+          } else {
+            Get.snackbar(
+              "Pesan",
+              "Silahkan menyelesaikan level 1 terlebih dahulu",
+              snackPosition: SnackPosition.TOP,
+              isDismissible: false,
+              backgroundColor: Colors.white,
+              duration: Duration(seconds: 3),
+              margin: EdgeInsets.only(bottom: 0, left: 0, right: 0),
+              colorText: Colors.black,
+              borderRadius: 0,
+            );
+          }
+        } else if (level == 3) {
+          if (users!.level2points == 20) {
+            pushNewScreen(
+              context,
+              screen: Quiz(
+                level: level,
+              ),
+              withNavBar: true,
+              pageTransitionAnimation: PageTransitionAnimation.fade,
+            );
+          } else {
+            Get.snackbar(
+              "Pesan",
+              "Silahkan menyelesaikan level 2 terlebih dahulu",
+              snackPosition: SnackPosition.TOP,
+              isDismissible: false,
+              backgroundColor: Colors.white,
+              duration: Duration(seconds: 3),
+              margin: EdgeInsets.only(bottom: 0, left: 0, right: 0),
+              colorText: Colors.black,
+              borderRadius: 0,
+            );
+          }
+        }
       },
       child: Container(
         margin: const EdgeInsets.only(top: 20, left: 20, right: 20),

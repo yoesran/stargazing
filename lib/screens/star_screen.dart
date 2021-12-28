@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import 'package:stargazing/star_content.dart';
+import 'package:stargazing/content.dart';
 
 class StarScreen extends StatefulWidget {
   const StarScreen({Key? key}) : super(key: key);
@@ -12,6 +12,8 @@ class StarScreen extends StatefulWidget {
 }
 
 class _StarScreenState extends State<StarScreen> {
+  String lorem =
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,59 +98,26 @@ class _StarScreenState extends State<StarScreen> {
                                         children: [
                                           Row(
                                             children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  pushNewScreen(
-                                                    context,
-                                                    screen: const StarContent(),
-                                                    pageTransitionAnimation: PageTransitionAnimation.fade,
-                                                  );
-                                                },
-                                                child: Category(
-                                                  image: "assets/images/1.png",
-                                                  tittle: "Bintang Tipe O",
-                                                  widthSize: MediaQuery.of(context).size.width / 2 - 40,
-                                                  heightSize: MediaQuery.of(context).size.height / 5,
-                                                ),
-                                              ),
-                                              Category(
-                                                image: "assets/images/1.png",
-                                                tittle: "Bintang Tipe O",
-                                                widthSize: MediaQuery.of(context).size.width / 2 - 40,
-                                                heightSize: MediaQuery.of(context).size.height / 5,
-                                              ),
+                                              Card(context, "assets/images/bintang/raksasa.png", "Bintang Raksasa", lorem,
+                                                  MediaQuery.of(context).size.width / 2 - 40, MediaQuery.of(context).size.height / 5),
+                                              Card(context, "assets/images/bintang/superraksasa.png", "Bintang Super Raksasa", lorem,
+                                                  MediaQuery.of(context).size.width / 2 - 40, MediaQuery.of(context).size.height / 5),
                                             ],
                                           ),
                                           Row(
                                             children: [
-                                              Category(
-                                                image: "assets/images/1.png",
-                                                tittle: "Bintang Tipe O",
-                                                widthSize: MediaQuery.of(context).size.width / 2 - 40,
-                                                heightSize: MediaQuery.of(context).size.height / 5,
-                                              ),
-                                              Category(
-                                                image: "assets/images/1.png",
-                                                tittle: "Bintang Tipe O",
-                                                widthSize: MediaQuery.of(context).size.width / 2 - 40,
-                                                heightSize: MediaQuery.of(context).size.height / 5,
-                                              ),
+                                              Card(context, "assets/images/bintang/katai.png", "Bintang Katai", lorem,
+                                                  MediaQuery.of(context).size.width / 2 - 40, MediaQuery.of(context).size.height / 5),
+                                              Card(context, "assets/images/bintang/neutron.png", "Bintang Neutron", lorem,
+                                                  MediaQuery.of(context).size.width / 2 - 40, MediaQuery.of(context).size.height / 5),
                                             ],
                                           ),
                                           Row(
                                             children: [
-                                              Category(
-                                                image: "assets/images/1.png",
-                                                tittle: "Bintang Tipe O",
-                                                widthSize: MediaQuery.of(context).size.width / 2 - 40,
-                                                heightSize: MediaQuery.of(context).size.height / 5,
-                                              ),
-                                              Category(
-                                                image: "assets/images/1.png",
-                                                tittle: "Bintang Tipe O",
-                                                widthSize: MediaQuery.of(context).size.width / 2 - 40,
-                                                heightSize: MediaQuery.of(context).size.height / 5,
-                                              ),
+                                              Card(context, "assets/images/bintang/pulsar.png", "Bintang Pulsar", lorem,
+                                                  MediaQuery.of(context).size.width / 2 - 40, MediaQuery.of(context).size.height / 5),
+                                              Card(context, "assets/images/bintang/magnetar.png", "Bintang Magnetar", lorem,
+                                                  MediaQuery.of(context).size.width / 2 - 40, MediaQuery.of(context).size.height / 5),
                                             ],
                                           ),
                                         ],
@@ -160,33 +129,20 @@ class _StarScreenState extends State<StarScreen> {
                                     scrollDirection: Axis.horizontal,
                                     child: Row(
                                       children: [
-                                        GestureDetector(
-                                          onTap: () {
-                                            pushNewScreen(
-                                              context,
-                                              screen: const StarContent(),
-                                              pageTransitionAnimation: PageTransitionAnimation.fade,
-                                            );
-                                          },
-                                          child: Category(
-                                            image: "assets/images/1.png",
-                                            tittle: "Bintang Tipe O",
-                                            widthSize: MediaQuery.of(context).size.width / 1.25,
-                                            heightSize: MediaQuery.of(context).size.height / 2,
-                                          ),
-                                        ),
-                                        Category(
-                                          image: "assets/images/1.png",
-                                          tittle: "Bintang Tipe O",
-                                          widthSize: MediaQuery.of(context).size.width / 1.25,
-                                          heightSize: MediaQuery.of(context).size.height / 2,
-                                        ),
-                                        Category(
-                                          image: "assets/images/1.png",
-                                          tittle: "Bintang Tipe O",
-                                          widthSize: MediaQuery.of(context).size.width / 1.25,
-                                          heightSize: MediaQuery.of(context).size.height / 2,
-                                        ),
+                                        Card(context, "assets/images/bintang/tipeo.png", "Bintang Tipe O", lorem,
+                                            MediaQuery.of(context).size.width / 1.25, MediaQuery.of(context).size.height / 2),
+                                        Card(context, "assets/images/bintang/tipeb.png", "Bintang Tipe B", lorem,
+                                            MediaQuery.of(context).size.width / 1.25, MediaQuery.of(context).size.height / 2),
+                                        Card(context, "assets/images/bintang/tipea.png", "Bintang Tipe A", lorem,
+                                            MediaQuery.of(context).size.width / 1.25, MediaQuery.of(context).size.height / 2),
+                                        Card(context, "assets/images/bintang/tipef.png", "Bintang Tipe F", lorem,
+                                            MediaQuery.of(context).size.width / 1.25, MediaQuery.of(context).size.height / 2),
+                                        Card(context, "assets/images/bintang/tipeg.png", "Bintang Tipe G", lorem,
+                                            MediaQuery.of(context).size.width / 1.25, MediaQuery.of(context).size.height / 2),
+                                        Card(context, "assets/images/bintang/tipek.png", "Bintang Tipe K", lorem,
+                                            MediaQuery.of(context).size.width / 1.25, MediaQuery.of(context).size.height / 2),
+                                        Card(context, "assets/images/bintang/tipem.png", "Bintang Tipe M", lorem,
+                                            MediaQuery.of(context).size.width / 1.25, MediaQuery.of(context).size.height / 2),
                                       ],
                                     ),
                                   ),
@@ -206,13 +162,35 @@ class _StarScreenState extends State<StarScreen> {
       ),
     );
   }
+
+  GestureDetector Card(BuildContext context, String image, String title, String content, double width, double height) {
+    return GestureDetector(
+      onTap: () {
+        pushNewScreen(
+          context,
+          screen: Content(
+            image: image,
+            title: title,
+            content: content,
+          ),
+          pageTransitionAnimation: PageTransitionAnimation.fade,
+        );
+      },
+      child: Category(
+        image: image,
+        title: title,
+        widthSize: width,
+        heightSize: height,
+      ),
+    );
+  }
 }
 
 class Category extends StatelessWidget {
-  const Category({Key? key, this.image, this.tittle, this.widthSize, this.heightSize}) : super(key: key);
+  const Category({Key? key, this.image, this.title, this.widthSize, this.heightSize}) : super(key: key);
 
   final String? image;
-  final String? tittle;
+  final String? title;
   final double? widthSize;
   final double? heightSize;
 
@@ -243,11 +221,11 @@ class Category extends StatelessWidget {
               )),
         ),
         Text(
-          tittle!,
+          title!,
           style: const TextStyle(
             fontFamily: "NATS",
             color: Colors.white,
-            fontSize: 24,
+            fontSize: 20,
           ),
           textAlign: TextAlign.center,
         ),

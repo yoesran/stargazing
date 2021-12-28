@@ -74,7 +74,7 @@ class QuestionCard extends StatelessWidget {
           ),
           (question.image == null)
               ? const SizedBox(
-                  height: 157,
+                  height: 250,
                 )
               : Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 14.0),
@@ -82,7 +82,7 @@ class QuestionCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     child: Image.asset(
                       question.image as String,
-                      height: 157,
+                      height: 250,
                     ),
                   ),
                 ),

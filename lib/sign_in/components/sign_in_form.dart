@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:stargazing/auth_services.dart';
 import 'package:stargazing/home.dart';
+import 'package:stargazing/services/auth_services.dart';
 import 'package:stargazing/sign_up/sign_up_screen.dart';
 
 class SignInForm extends StatefulWidget {
@@ -74,6 +74,9 @@ class _SignInFormState extends State<SignInForm> {
                             colorText: Colors.black,
                             borderRadius: 0,
                           );
+                          setState(() {
+                            isPressed = !isPressed;
+                          });
                         } else {
                           Get.offAll(() => Home());
                         }

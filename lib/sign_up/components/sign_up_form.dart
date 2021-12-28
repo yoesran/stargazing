@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:stargazing/auth_services.dart';
 import 'package:stargazing/home.dart';
-import 'package:stargazing/user_services.dart';
+import 'package:stargazing/services/auth_services.dart';
+import 'package:stargazing/services/user_services.dart';
 
 class SignUpForm extends StatefulWidget {
   @override
@@ -117,6 +117,9 @@ class _SignUpFormState extends State<SignUpForm> {
                               colorText: Colors.black,
                               borderRadius: 0,
                             );
+                            setState(() {
+                              isPressed = !isPressed;
+                            });
                           } else {
                             UserServices.saveUser(result.user!.uid, result.user!.email, namaController.text, "", "", 0, 0, 0, "");
                             Get.offAll(() => Home());

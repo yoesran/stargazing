@@ -1,24 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:stargazing/controllers/question_controller.dart';
 import 'package:stargazing/quiz/question_card.dart';
 import 'package:get/get.dart';
 
-class Quiz extends StatelessWidget {
+class Quiz extends StatefulWidget {
   const Quiz({Key? key, this.level}) : super(key: key);
 
   final int? level;
 
   @override
+  _QuizState createState() => _QuizState();
+}
+
+class _QuizState extends State<Quiz> {
+  static const url = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3';
+  late AudioPlayer _audioPlayer;
+
+  void _init() async {
+    _audioPlayer = AudioPlayer();
+    await _audioPlayer.setUrl(url);
+    _audioPlayer.play();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _init();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    _audioPlayer.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     QuestionController _questionController = Get.put(
-      QuestionController((level == 1)
-          ? 1
-          : (level == 2)
-              ? 2
-              : (level == 3)
-                  ? 3
-                  : 1),
+      QuestionController(
+        (widget.level == 1)
+            ? 1
+            : (widget.level == 2)
+                ? 2
+                : (widget.level == 3)
+                    ? 3
+                    : 1,
+      ),
     );
 
     return Scaffold(
@@ -29,15 +60,16 @@ class Quiz extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
 
           // onPageChanged: _questionController.updateTheQnNum,
+
           itemCount: 10,
           itemBuilder: (context, index) => QuestionCard(
             size: size,
             questionController: _questionController,
-            question: (level == 1)
+            question: (widget.level == 1)
                 ? _questionController.questions[index]
-                : (level == 2)
+                : (widget.level == 2)
                     ? _questionController.questions[index + 10]
-                    : (level == 3)
+                    : (widget.level == 3)
                         ? _questionController.questions[index + 20]
                         : _questionController.questions[index],
           ),

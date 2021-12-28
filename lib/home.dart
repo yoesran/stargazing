@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import 'package:stargazing/leaderboard.dart';
-import 'package:stargazing/main_screen.dart';
-import 'package:stargazing/profile_screen.dart';
-import 'package:stargazing/quiz_screen.dart';
+import 'package:stargazing/Screens/main_screen.dart';
+import 'package:stargazing/Screens/profile_screen.dart';
+import 'package:stargazing/Screens/quiz_screen.dart';
+import 'package:stargazing/Screens/leaderboard_screen.dart';
 import 'package:stargazing/quiz/quiz.dart';
 
 class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({Key? key, this.index}) : super(key: key);
+  final int? index;
 
   @override
   Widget build(BuildContext context) {
     PersistentTabController _controller;
 
-    _controller = PersistentTabController(initialIndex: 0);
+    _controller = PersistentTabController(initialIndex: (index == null) ? 0 : index!);
 
     return PersistentTabView(
       context,
@@ -48,7 +49,7 @@ class Home extends StatelessWidget {
   }
 
   List<Widget> _buildScreens() {
-    return [const MainScreen(), const QuizScreen(), const LeaderBoard(), const ProfileScreen()];
+    return [const MainScreen(), const QuizScreen(), const LeaderBoardScreen(), const ProfileScreen()];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {

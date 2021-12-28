@@ -8,10 +8,10 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:provider/provider.dart';
-import 'package:stargazing/auth_services.dart';
 import 'package:stargazing/models/users.dart';
 import 'package:stargazing/on_boarding.dart';
-import 'package:stargazing/user_services.dart';
+import 'package:stargazing/services/auth_services.dart';
+import 'package:stargazing/services/user_services.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -28,9 +28,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   TextEditingController passwordController = TextEditingController();
 
   Users? users;
-  bool isLoaded = false, isPressed = false, isFile = false;
+  bool isLoaded = false, isPressed = false, isFile = false, isPressedPassword = false;
   File? profilePicture;
-  String? picture = "https://drive.google.com/uc?export=view&id=1JTavNbUwwyVXVpaK5wAB8d7xN6WkKFm3";
+  String? picture = "https://drive.google.com/uc?export=view&id=1gp_gyRlf5IQD4LyRI-E1Eshc1fF4LV_3";
 
   @override
   Widget build(BuildContext context) {
@@ -248,6 +248,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     isPressed = !isPressed;
                                   });
                                   String profileLink = await uploadImage(profilePicture);
+                                  if (users!.profilePicture != "") {
+                                    await deleteFileFromFirebaseByUrl(users!.profilePicture);
+                                  }
                                   await UserServices.updateUser(user!.uid, user.email, nameController.text, noTelpController.text,
                                       alamatController.text, users!.level1points, users!.level2points, users!.level3points, profileLink);
                                   setState(() {
@@ -336,84 +339,98 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 showDialog(
                                   context: context,
                                   builder: (context) {
-                                    return AlertDialog(
-                                      backgroundColor: Color(0xFF312244),
-                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                                      elevation: 5,
-                                      content: SizedBox(
-                                        height: 225,
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-                                            const Text(
-                                              "Masukkan Password Anda",
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            buildPasswordFormField(),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            Container(
-                                              decoration: const BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    offset: Offset(1, 1),
-                                                    blurRadius: 2,
-                                                    color: Colors.white,
-                                                  ),
-                                                ],
-                                              ),
-                                              width: double.infinity,
-                                              child: ClipRRect(
-                                                borderRadius: BorderRadius.circular(5),
-                                                child: ElevatedButton(
-                                                  child: const Text(
-                                                    "Hapus Akun",
-                                                    style: TextStyle(color: Color(0xFF7878AB), fontWeight: FontWeight.w600),
-                                                  ),
-                                                  onPressed: () async {
-                                                    SignInSignUpResult result =
-                                                        await AuthServices.signInEmail(emailController.text, passwordController.text);
-                                                    if (result.user == null) {
-                                                      Get.snackbar(
-                                                        "Pesan",
-                                                        result.message,
-                                                        snackPosition: SnackPosition.TOP,
-                                                        isDismissible: false,
-                                                        backgroundColor: Colors.white,
-                                                        duration: Duration(seconds: 3),
-                                                        margin: EdgeInsets.only(bottom: 0, left: 0, right: 0),
-                                                        colorText: Colors.black,
-                                                        borderRadius: 0,
-                                                      );
-                                                    } else {
-                                                      // if (picture !=
-                                                      //     "https://drive.google.com/uc?export=view&id=1JTavNbUwwyVXVpaK5wAB8d7xN6WkKFm3") {
-                                                      //   await deleteFileFromFirebaseByUrl(picture!);
-                                                      // }
-                                                      await UserServices.deleteUser(user!.uid, user.email, passwordController.text);
-                                                      Get.offAll(() => OnBoarding());
-                                                    }
-                                                  },
-                                                  style: ElevatedButton.styleFrom(
-                                                      primary: Colors.white,
-                                                      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                                                      textStyle: const TextStyle(color: Colors.white, fontSize: 16)),
+                                    return StatefulBuilder(builder: (context, setState) {
+                                      return AlertDialog(
+                                        backgroundColor: Color(0xFF312244),
+                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                        elevation: 5,
+                                        content: SizedBox(
+                                          height: 225,
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              const Text(
+                                                "Masukkan Password Anda",
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                            ),
-                                          ],
+                                              SizedBox(
+                                                height: 20,
+                                              ),
+                                              buildPasswordFormField(),
+                                              SizedBox(
+                                                height: 20,
+                                              ),
+                                              (isPressedPassword)
+                                                  ? const SpinKitFadingCircle(
+                                                      color: Colors.white,
+                                                      size: 50,
+                                                    )
+                                                  : Container(
+                                                      decoration: const BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            offset: Offset(1, 1),
+                                                            blurRadius: 2,
+                                                            color: Colors.white,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      width: double.infinity,
+                                                      child: ClipRRect(
+                                                        borderRadius: BorderRadius.circular(5),
+                                                        child: ElevatedButton(
+                                                          child: const Text(
+                                                            "Hapus Akun",
+                                                            style: TextStyle(color: Color(0xFF7878AB), fontWeight: FontWeight.w600),
+                                                          ),
+                                                          onPressed: () async {
+                                                            setState(() {
+                                                              isPressedPassword = true;
+                                                            });
+
+                                                            SignInSignUpResult result = await AuthServices.signInEmail(
+                                                                emailController.text, passwordController.text);
+                                                            if (result.user == null) {
+                                                              Get.snackbar(
+                                                                "Pesan",
+                                                                result.message,
+                                                                snackPosition: SnackPosition.TOP,
+                                                                isDismissible: false,
+                                                                backgroundColor: Colors.white,
+                                                                duration: Duration(seconds: 3),
+                                                                margin: EdgeInsets.only(bottom: 0, left: 0, right: 0),
+                                                                colorText: Colors.black,
+                                                                borderRadius: 0,
+                                                              );
+                                                              setState(() {
+                                                                isPressedPassword = true;
+                                                              });
+                                                            } else {
+                                                              if (picture !=
+                                                                  "https://drive.google.com/uc?export=view&id=1gp_gyRlf5IQD4LyRI-E1Eshc1fF4LV_3") {
+                                                                await deleteFileFromFirebaseByUrl(picture!);
+                                                              }
+                                                              await UserServices.deleteUser(user!.uid, user.email, passwordController.text);
+                                                              Get.offAll(() => OnBoarding());
+                                                            }
+                                                          },
+                                                          style: ElevatedButton.styleFrom(
+                                                              primary: Colors.white,
+                                                              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                                                              textStyle: const TextStyle(color: Colors.white, fontSize: 16)),
+                                                        ),
+                                                      ),
+                                                    ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    );
+                                      );
+                                    });
                                   },
                                 );
                               },

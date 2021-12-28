@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:stargazing/Screens/komet_screen.dart';
+import 'package:stargazing/Screens/meteor_screen.dart';
+import 'package:stargazing/Screens/planet_screen.dart';
+import 'package:stargazing/Screens/satelit_screen.dart';
+import 'package:stargazing/Screens/star_screen.dart';
 import 'package:stargazing/sign_in/sign_in_screen.dart';
-import 'package:stargazing/star_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -57,31 +61,71 @@ class _MainScreenState extends State<MainScreen> {
                             isRepeat: true,
                           ),
                         ),
-                        Category(
-                          lottie: "assets/lotties/planets.json",
-                          tittle: "Planet",
-                          isRepeat: true,
+                        GestureDetector(
+                          onTap: () {
+                            pushNewScreen(
+                              context,
+                              screen: PlanetScreen(),
+                              withNavBar: true,
+                              pageTransitionAnimation: PageTransitionAnimation.fade,
+                            );
+                          },
+                          child: Category(
+                            lottie: "assets/lotties/planets.json",
+                            tittle: "Planet",
+                            isRepeat: true,
+                          ),
                         ),
                       ],
                     ),
                     Row(
                       children: [
-                        Category(
-                          lottie: "assets/lotties/comet.json",
-                          tittle: "Komet",
-                          isRepeat: false,
+                        GestureDetector(
+                          onTap: () {
+                            pushNewScreen(
+                              context,
+                              screen: KometScreen(),
+                              withNavBar: true,
+                              pageTransitionAnimation: PageTransitionAnimation.fade,
+                            );
+                          },
+                          child: Category(
+                            lottie: "assets/lotties/comet.json",
+                            tittle: "Komet",
+                            isRepeat: false,
+                          ),
                         ),
-                        Category(
-                          lottie: "assets/lotties/meteors.json",
-                          tittle: "Meteor",
-                          isRepeat: false,
+                        GestureDetector(
+                          onTap: () {
+                            pushNewScreen(
+                              context,
+                              screen: MeteorScreen(),
+                              withNavBar: true,
+                              pageTransitionAnimation: PageTransitionAnimation.fade,
+                            );
+                          },
+                          child: Category(
+                            lottie: "assets/lotties/meteors.json",
+                            tittle: "Meteor",
+                            isRepeat: false,
+                          ),
                         ),
                       ],
                     ),
-                    Category(
-                      lottie: "assets/lotties/satellite.json",
-                      tittle: "Satelit",
-                      isRepeat: true,
+                    GestureDetector(
+                      onTap: () {
+                        pushNewScreen(
+                          context,
+                          screen: SatelitScreen(),
+                          withNavBar: true,
+                          pageTransitionAnimation: PageTransitionAnimation.fade,
+                        );
+                      },
+                      child: Category(
+                        lottie: "assets/lotties/satellite.json",
+                        tittle: "Satelit",
+                        isRepeat: true,
+                      ),
                     ),
                   ],
                 ),

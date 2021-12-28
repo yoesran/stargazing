@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 
-class StarContent extends StatefulWidget {
-  const StarContent({Key? key}) : super(key: key);
+class Content extends StatefulWidget {
+  const Content({
+    Key? key,
+    required this.image,
+    required this.content,
+    required this.title,
+  }) : super(key: key);
+
+  final String image;
+  final String content;
+  final String title;
 
   @override
-  _StarContentState createState() => _StarContentState();
+  _ContentState createState() => _ContentState();
 }
 
-class _StarContentState extends State<StarContent> {
+class _ContentState extends State<Content> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +32,11 @@ class _StarContentState extends State<StarContent> {
                       bottomLeft: Radius.circular(20),
                       bottomRight: Radius.circular(20),
                     ),
-                    child: Image.asset("assets/images/1.png"),
+                    child: Image.asset(
+                      widget.image,
+                      width: MediaQuery.of(context).size.width,
+                      fit: BoxFit.fill,
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(24.0),
@@ -46,7 +59,7 @@ class _StarContentState extends State<StarContent> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Bintang Tipe O",
+                      widget.title,
                       style: TextStyle(
                         fontFamily: "NATS",
                         color: Colors.white,
@@ -54,7 +67,7 @@ class _StarContentState extends State<StarContent> {
                       ),
                     ),
                     Text(
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                      widget.content,
                       style: TextStyle(
                         fontFamily: "NATS",
                         color: Colors.white,
