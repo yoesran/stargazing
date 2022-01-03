@@ -60,7 +60,7 @@ class _ContentState extends State<Content> {
                   children: [
                     Text(
                       widget.title,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: "NATS",
                         color: Colors.white,
                         fontSize: 28,
@@ -68,7 +68,7 @@ class _ContentState extends State<Content> {
                     ),
                     Text(
                       widget.content,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: "NATS",
                         color: Colors.white,
                         fontSize: 20,

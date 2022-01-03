@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:stargazing/content.dart';
@@ -159,7 +158,15 @@ class _KometScreenState extends State<KometScreen> {
     );
   }
 
-  GestureDetector Card(BuildContext context, String image, String title, String content, double width, double height) {
+  // ignore: non_constant_identifier_names
+  GestureDetector Card(
+    BuildContext context,
+    String image,
+    String title,
+    String content,
+    double width,
+    double height,
+  ) {
     return GestureDetector(
       onTap: () {
         pushNewScreen(

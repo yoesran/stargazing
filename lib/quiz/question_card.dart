@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:stargazing/controllers/question_controller.dart';
 import 'package:stargazing/models/questions.dart';
 import 'package:stargazing/quiz/option.dart';
@@ -31,15 +30,15 @@ class QuestionCard extends StatelessWidget {
           ),
           //progress circle
           Container(
-            width: (size.height < 700) ? 125 : 180,
-            height: (size.height < 700) ? 65 : 80,
+            width: 180,
+            height: 80,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
               color: Colors.white,
             ),
             // child: LinearPercentIndicator(percent: _questionController.questionNumber.value / 10, )
             child: CircularPercentIndicator(
-              radius: (size.height < 700) ? 60.0 : 70.0,
+              radius: 70.0,
               lineWidth: 7.0,
               // animationDuration: 1000,
               percent: _questionController.questionNumber.value / 10,
@@ -74,7 +73,7 @@ class QuestionCard extends StatelessWidget {
           ),
           (question.image == null)
               ? const SizedBox(
-                  height: 250,
+                  height: 175,
                 )
               : Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 14.0),
@@ -82,7 +81,7 @@ class QuestionCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     child: Image.asset(
                       question.image as String,
-                      height: 250,
+                      height: 175,
                     ),
                   ),
                 ),
@@ -98,7 +97,7 @@ class QuestionCard extends StatelessWidget {
                 (index) => Option(
                   index: index,
                   text: question.options![index],
-                  press: () => _questionController.checkedAns(question, index),
+                  press: () => _questionController.checkedAns(index),
                 ),
               ),
             ],
@@ -113,7 +112,7 @@ class QuestionCard extends StatelessWidget {
                 (index) => Option(
                   index: index + 2,
                   text: question.options![index + 2],
-                  press: () => _questionController.checkedAns(question, index + 2),
+                  press: () => _questionController.checkedAns(index + 2),
                 ),
               ),
             ],
@@ -135,7 +134,7 @@ class QuestionCard extends StatelessWidget {
                               shape: const StadiumBorder(),
                             ),
                             onPressed: () {
-                              qnController.nextQuestion();
+                              qnController.nextQuestion(question.id!);
                             },
                             child: const Text("Selanjutnya"),
                           )

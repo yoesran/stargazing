@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 import 'package:stargazing/sign_up/sign_up_screen.dart';
 
 class OnBoarding extends StatelessWidget {
@@ -76,7 +75,7 @@ class OnBoarding extends StatelessWidget {
                           style: TextStyle(color: Colors.white),
                         ),
                         onPressed: () async {
-                          Get.to(() => SignUpScreen());
+                          Get.to(() => const SignUpScreen());
                         },
                         style: ElevatedButton.styleFrom(
                             primary: const Color(0xFFAD6C80),

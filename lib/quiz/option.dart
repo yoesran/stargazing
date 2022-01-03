@@ -34,31 +34,6 @@ class Option extends StatelessWidget {
                 "$text",
                 style: TextStyle(color: (index == qnController.selectedIndex) ? Colors.blue : Colors.white, fontSize: 15),
               ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     Text(
-              //       "$text",
-              //       style: TextStyle(color: (index == qnController.selectedIndex) ? Colors.blue : Colors.white, fontSize: 15),
-              //     ),
-              //     Container(
-              //       height: 20,
-              //       width: 20,
-              //       decoration: BoxDecoration(
-              //         color: (index == qnController.selectedIndex) ? Colors.green : Colors.transparent,
-              //         borderRadius: BorderRadius.circular(50),
-              //         border: Border.all(color: (index == qnController.selectedIndex) ? Colors.white : Colors.grey),
-              //       ),
-              //       child: (index == qnController.selectedIndex)
-              //           ? Icon(
-              //               Icons.done,
-              //               size: 16,
-              //               color: Colors.white,
-              //             )
-              //           : null,
-              //     )
-              //   ],
-              // ),
             ),
           ),
         );

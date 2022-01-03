@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:stargazing/content.dart';
@@ -63,41 +62,112 @@ class _SatelitScreenState extends State<SatelitScreen> {
                         length: 2,
                         child: Column(
                           children: [
+                            Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: TabBar(
+                                unselectedLabelColor: Colors.white,
+                                enableFeedback: false,
+                                indicatorSize: TabBarIndicatorSize.label,
+                                indicator: BoxDecoration(borderRadius: BorderRadius.circular(50), color: Colors.white.withOpacity(0.25)),
+                                tabs: const [
+                                  Tab(
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: Text("Alam", style: TextStyle(fontSize: 13)),
+                                    ),
+                                  ),
+                                  Tab(
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: Text("Buatan", style: TextStyle(fontSize: 13)),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                             Flexible(
                               fit: FlexFit.loose,
-                              child: SingleChildScrollView(
-                                physics: const BouncingScrollPhysics(),
-                                child: SizedBox(
-                                  height: MediaQuery.of(context).size.height + MediaQuery.of(context).size.height / 5,
-                                  child: Column(
-                                    children: [
-                                      Row(
+                              child: TabBarView(
+                                children: [
+                                  SingleChildScrollView(
+                                    physics: const BouncingScrollPhysics(),
+                                    child: SizedBox(
+                                      height: MediaQuery.of(context).size.height,
+                                      child: Column(
                                         children: [
-                                          Card(context, "assets/images/bintang/raksasa.png", "Bintang Raksasa", lorem,
-                                              MediaQuery.of(context).size.width / 2 - 40, MediaQuery.of(context).size.height / 5),
-                                          Card(context, "assets/images/bintang/superraksasa.png", "Bintang Super Raksasa", lorem,
-                                              MediaQuery.of(context).size.width / 2 - 40, MediaQuery.of(context).size.height / 5),
+                                          Row(
+                                            children: [
+                                              Card(
+                                                  context,
+                                                  "assets/images/satelit/moon.png",
+                                                  "Bulan",
+                                                  "Bulan adalah satelit alami Bumi satu-satunya dan merupakan satelit terbesar kelima dalam Tata Surya. Bulan juga merupakan satelit alami terbesar di Tata Surya menurut ukuran planet yang diorbitnya, dengan diameter 27%, kepadatan 60%, dan massa ​1⁄81 (1.23%) dari Bumi. Di antara satelit alami lainnya, Bulan adalah satelit terpadat kedua setelah Io, satelit Jupiter.",
+                                                  MediaQuery.of(context).size.width / 2 - 40,
+                                                  MediaQuery.of(context).size.height / 5),
+                                              Card(
+                                                  context,
+                                                  "assets/images/satelit/titan.png",
+                                                  "Titan",
+                                                  "Titan (atau Saturnus VI) adalah satelit alami elipsoidal keenam sekaligus terbesar dari Saturnus. Satelit ini merupakan satu-satunya satelit alami yang memiliki atmosfer padat, dan satu-satunya objek selain Bumi yang terbukti memiliki cairan di permukaan.",
+                                                  MediaQuery.of(context).size.width / 2 - 40,
+                                                  MediaQuery.of(context).size.height / 5),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Card(
+                                                  context,
+                                                  "assets/images/satelit/ganymede.png",
+                                                  "Ganymede",
+                                                  "Ganimede adalah satelit alami planet Jupiter dan merupakan satelit alami terbesar di Tata Surya. Ganimede adalah satelit terbesar ketujuh di Tata Surya dan satelit Galileo ketiga dari Jupiter. Satelit ini mengitari planetnya selama tujuh hari. Ganimede turut serta dalam resonansi orbit 1:2:4 dengan satelit Europa dan Io. Satelit ini lebih besar diameternya dibanding planet Merkurius, namun massanya hanya sekitar setengahnya.",
+                                                  MediaQuery.of(context).size.width / 2 - 40,
+                                                  MediaQuery.of(context).size.height / 5),
+                                            ],
+                                          ),
                                         ],
                                       ),
-                                      Row(
-                                        children: [
-                                          Card(context, "assets/images/bintang/katai.png", "Bintang Katai", lorem,
-                                              MediaQuery.of(context).size.width / 2 - 40, MediaQuery.of(context).size.height / 5),
-                                          Card(context, "assets/images/bintang/neutron.png", "Bintang Neutron", lorem,
-                                              MediaQuery.of(context).size.width / 2 - 40, MediaQuery.of(context).size.height / 5),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Card(context, "assets/images/bintang/pulsar.png", "Bintang Pulsar", lorem,
-                                              MediaQuery.of(context).size.width / 2 - 40, MediaQuery.of(context).size.height / 5),
-                                          Card(context, "assets/images/bintang/magnetar.png", "Bintang Magnetar", lorem,
-                                              MediaQuery.of(context).size.width / 2 - 40, MediaQuery.of(context).size.height / 5),
-                                        ],
-                                      ),
-                                    ],
+                                    ),
                                   ),
-                                ),
+                                  SingleChildScrollView(
+                                    physics: const BouncingScrollPhysics(),
+                                    child: SizedBox(
+                                      height: MediaQuery.of(context).size.height,
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Card(
+                                                  context,
+                                                  "assets/images/satelit/nimbus.png",
+                                                  "Nimbus",
+                                                  "Satelit Nimbus adalah pesawat ruang angkasa robot generasi kedua US yang digunakan untuk penelitian meteorologi dan pengembangan. Pesawat ruang angkasa yang dirancang untuk melayani sebagai stabil, platform Bumi berorientasi untuk pengujian sistem canggih untuk merasakan dan mengumpulkan data sains atmosfer. Tujuh Nimbus pesawat ruang angkasa telah diluncurkan ke dekat-polar, orbit matahari-sinkron dimulai dengan Nimbus 1 pada tanggal 28 Agustus 1964 Di papan satelit Nimbus berbagai instrumentasi untuk pencitraan, terdengar, dan penelitian lain di daerah spektral yang berbeda. Nimbus satelit diluncurkan kapal roket Thor-Agena (Nimbus 1-4) dan Delta roket (Nimbus 5-7).",
+                                                  MediaQuery.of(context).size.width / 2 - 40,
+                                                  MediaQuery.of(context).size.height / 5),
+                                              Card(
+                                                  context,
+                                                  "assets/images/satelit/vanguard.png",
+                                                  "Vanguard 1",
+                                                  "Proyek Vanguard adalah sebuah program yang dikelola oleh United States Naval Research Laboratory (NRL), yang dimaksudkan untuk meluncurkan satelit buatan pertama ke orbit Bumi dengan menggunakan roket Vanguard sebagai kendaraan peluncuran dari Cape Canaveral Missile Annex, Florida.",
+                                                  MediaQuery.of(context).size.width / 2 - 40,
+                                                  MediaQuery.of(context).size.height / 5),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Card(
+                                                  context,
+                                                  "assets/images/satelit/noaa19.png",
+                                                  "NOAA-19",
+                                                  "NOAA-19, yang ditunjuk NOAA-N '(NOAA-N Prime) sebelum diluncurkan, adalah serangkaian satelit cuaca yang terakhir dari Amerika Serikat National Oceanic and Atmospheric Administration POES (yang dijadwalkan akan digantikan oleh berikutnya-seri NPOESS generasi sebelum proyek NPOESS dibatalkan). NOAA-19 diluncurkan pada 6 Februari 2009.",
+                                                  MediaQuery.of(context).size.width / 2 - 40,
+                                                  MediaQuery.of(context).size.height / 5),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],

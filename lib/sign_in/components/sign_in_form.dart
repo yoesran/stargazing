@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -6,6 +8,8 @@ import 'package:stargazing/services/auth_services.dart';
 import 'package:stargazing/sign_up/sign_up_screen.dart';
 
 class SignInForm extends StatefulWidget {
+  const SignInForm({Key? key}) : super(key: key);
+
   @override
   _SignInFormState createState() => _SignInFormState();
 }

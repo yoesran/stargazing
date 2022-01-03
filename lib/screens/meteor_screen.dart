@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:stargazing/content.dart';
@@ -66,7 +65,7 @@ class _MeteorScreenState extends State<MeteorScreen> {
                             child: SingleChildScrollView(
                               physics: const BouncingScrollPhysics(),
                               child: SizedBox(
-                                height: MediaQuery.of(context).size.height + MediaQuery.of(context).size.height / 2,
+                                height: MediaQuery.of(context).size.height,
                                 child: Column(
                                   children: [
                                     Row(

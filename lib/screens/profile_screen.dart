@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -152,11 +154,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ],
                 ),
               ),
-              // Text(
-              //   (users == null) ? "" : "Point Kuis : " + users!.level1points.toString(),
-              //   style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-              //   textAlign: TextAlign.start,
-              // ),
               const SizedBox(
                 height: 20,
               ),
@@ -607,8 +604,6 @@ class ProfileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = Theme.of(context).colorScheme.primary;
-
     return Center(
       child: Stack(
         children: [

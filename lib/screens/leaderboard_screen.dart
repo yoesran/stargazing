@@ -1,8 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:stargazing/models/users.dart';
 import 'package:stargazing/on_boarding.dart';
@@ -20,92 +23,100 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
   @override
   Widget build(BuildContext context) {
     User? user = Provider.of<User?>(context);
+    if (user == null) {
+      Get.offAll(const OnBoarding());
+    }
 
     return Scaffold(
       backgroundColor: const Color(0xFF312244),
       body: SafeArea(
         child: SingleChildScrollView(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           child: Container(
             color: const Color(0xFF312244),
-            child: Column(
+            child: Stack(
               children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                const Text(
-                  "Papan Peringkat",
-                  style: TextStyle(fontFamily: "NATS", color: Colors.white, fontSize: 24, fontWeight: FontWeight.normal),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                FutureBuilder(
-                  future: UserServices.getUser(user!.uid),
-                  builder: (_, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      Users data = snapshot.data as Users;
-                      if (user == null) {
-                        Get.offAll(OnBoarding());
-                      }
-                      return SizedBox(
-                        height: MediaQuery.of(context).size.height,
-                        child: DefaultTabController(
-                          length: 3,
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: TabBar(
-                                  unselectedLabelColor: Colors.white,
-                                  enableFeedback: false,
-                                  indicatorSize: TabBarIndicatorSize.label,
-                                  indicator: BoxDecoration(borderRadius: BorderRadius.circular(50), color: Colors.white.withOpacity(0.25)),
-                                  tabs: const [
-                                    Tab(
-                                      child: Align(
-                                        alignment: Alignment.center,
-                                        child: Text("Level 1", style: TextStyle(fontSize: 13)),
-                                      ),
+                Lottie.asset("assets/lotties/sky.json"),
+                Align(alignment: Alignment.topRight, child: Lottie.asset("assets/lotties/astronot.json", width: 100)),
+                Column(
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Text(
+                      "Papan Peringkat",
+                      style: TextStyle(fontFamily: "NATS", color: Colors.white, fontSize: 24, fontWeight: FontWeight.normal),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    FutureBuilder(
+                      future: UserServices.getUser(user!.uid),
+                      builder: (_, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          Users data = snapshot.data as Users;
+
+                          return SizedBox(
+                            height: MediaQuery.of(context).size.height,
+                            child: DefaultTabController(
+                              length: 3,
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TabBar(
+                                      unselectedLabelColor: Colors.white,
+                                      enableFeedback: false,
+                                      indicatorSize: TabBarIndicatorSize.label,
+                                      indicator:
+                                          BoxDecoration(borderRadius: BorderRadius.circular(50), color: Colors.white.withOpacity(0.25)),
+                                      tabs: const [
+                                        Tab(
+                                          child: Align(
+                                            alignment: Alignment.center,
+                                            child: Text("Level 1", style: TextStyle(fontSize: 13)),
+                                          ),
+                                        ),
+                                        Tab(
+                                          child: Align(
+                                            alignment: Alignment.center,
+                                            child: Text("Level 2", style: TextStyle(fontSize: 13)),
+                                          ),
+                                        ),
+                                        Tab(
+                                          child: Align(
+                                            alignment: Alignment.center,
+                                            child: Text("Level 3", style: TextStyle(fontSize: 13)),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    Tab(
-                                      child: Align(
-                                        alignment: Alignment.center,
-                                        child: Text("Level 2", style: TextStyle(fontSize: 13)),
-                                      ),
+                                  ),
+                                  Flexible(
+                                    fit: FlexFit.loose,
+                                    child: TabBarView(
+                                      physics: NeverScrollableScrollPhysics(),
+                                      children: [
+                                        levelLeaderboard(data, "level1points"),
+                                        levelLeaderboard(data, "level2points"),
+                                        levelLeaderboard(data, "level3points"),
+                                      ],
                                     ),
-                                    Tab(
-                                      child: Align(
-                                        alignment: Alignment.center,
-                                        child: Text("Level 3", style: TextStyle(fontSize: 13)),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                              Flexible(
-                                fit: FlexFit.loose,
-                                child: TabBarView(
-                                  physics: NeverScrollableScrollPhysics(),
-                                  children: [
-                                    levelLeaderboard(data, "level1points"),
-                                    levelLeaderboard(data, "level2points"),
-                                    levelLeaderboard(data, "level3points"),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    } else {
-                      return const SpinKitFadingCircle(
-                        color: Colors.white,
-                        size: 50,
-                      );
-                    }
-                  },
+                            ),
+                          );
+                        } else {
+                          return const SpinKitFadingCircle(
+                            color: Colors.white,
+                            size: 50,
+                          );
+                        }
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),

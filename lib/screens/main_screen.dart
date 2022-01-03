@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -6,7 +8,6 @@ import 'package:stargazing/Screens/meteor_screen.dart';
 import 'package:stargazing/Screens/planet_screen.dart';
 import 'package:stargazing/Screens/satelit_screen.dart';
 import 'package:stargazing/Screens/star_screen.dart';
-import 'package:stargazing/sign_in/sign_in_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);

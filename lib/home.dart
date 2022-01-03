@@ -4,7 +4,6 @@ import 'package:stargazing/Screens/main_screen.dart';
 import 'package:stargazing/Screens/profile_screen.dart';
 import 'package:stargazing/Screens/quiz_screen.dart';
 import 'package:stargazing/Screens/leaderboard_screen.dart';
-import 'package:stargazing/quiz/quiz.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key, this.index}) : super(key: key);

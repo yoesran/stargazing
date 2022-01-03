@@ -13,13 +13,16 @@ class QuestionController extends GetxController {
   PageController? _pageController;
   PageController get pageController => this._pageController as PageController;
 
-  List<Question> _questions = sample_data
-      .map((question) => Question(
-            id: question['id'],
-            question: question['question'],
-            image: question['image'],
-            options: question['options'],
-          ))
+  List<Question> _questions = question_data
+      .map(
+        (question) => Question(
+          id: question['id'],
+          question: question['question'],
+          image: question['image'],
+          answer: question['answer'],
+          options: question['options'],
+        ),
+      )
       .toList();
 
   List<Question> get questions => this._questions;
@@ -30,8 +33,8 @@ class QuestionController extends GetxController {
   int? _selectedIndex;
   int? get selectedIndex => this._selectedIndex;
 
-  List<int> _answers = [];
-  List<int> get answers => this._answers;
+  List<bool> _answers = [];
+  List<bool> get answers => this._answers;
 
   RxInt _questionNumber = 1.obs;
   RxInt get questionNumber => this._questionNumber;
@@ -48,26 +51,27 @@ class QuestionController extends GetxController {
     super.onClose();
   }
 
-  void checkedAns(Question question, int selectedIndex) {
+  void checkedAns(int selectedIndex) {
     _isAnswered = true;
     _selectedIndex = selectedIndex;
     update();
   }
 
-  void nextQuestion() {
+  void nextQuestion(int id) {
     if (_questionNumber.value != 10) {
       _isAnswered = false;
-      _answers.add(_selectedIndex!);
+      _answers.add(_selectedIndex! == _questions[id - 1].answer);
       _selectedIndex = null;
       _questionNumber.value++;
       _pageController?.nextPage(duration: const Duration(milliseconds: 1), curve: Curves.ease);
     } else {
-      _answers.add(_selectedIndex!);
-      // _pageController?.dispose();
-      Get.offAll(() => Result(
-            choices: _answers,
-            level: level,
-          ));
+      _answers.add(_selectedIndex! == _questions[id - 1].answer);
+      Get.offAll(
+        () => Result(
+          choices: _answers,
+          level: level,
+        ),
+      );
       Get.delete<QuestionController>();
     }
   }

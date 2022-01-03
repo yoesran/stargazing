@@ -1,7 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:just_audio/just_audio.dart';
+import 'package:lottie/lottie.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 import 'package:stargazing/models/users.dart';
@@ -36,6 +38,8 @@ class _QuizScreenState extends State<QuizScreen> {
       body: SafeArea(
         child: Stack(
           children: [
+            Lottie.asset("assets/lotties/sky.json"),
+            Align(alignment: Alignment.topRight, child: Lottie.asset("assets/lotties/astronot.json", width: 100)),
             Image.asset(
               "assets/images/quiz.png",
             ),

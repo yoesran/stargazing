@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -7,6 +9,8 @@ import 'package:stargazing/services/auth_services.dart';
 import 'package:stargazing/services/user_services.dart';
 
 class SignUpForm extends StatefulWidget {
+  const SignUpForm({Key? key}) : super(key: key);
+
   @override
   _SignUpFormState createState() => _SignUpFormState();
 }
